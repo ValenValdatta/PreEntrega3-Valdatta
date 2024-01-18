@@ -14,9 +14,9 @@ export const app = () => {
     }
 
     productosManager.mostrarProductos();
+    
+    productosManager.mostrarCarrito();
 
-
-    productosManager.eliminarProducto();
 }
 
 

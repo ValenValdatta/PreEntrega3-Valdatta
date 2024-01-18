@@ -8,5 +8,5 @@ export const crearProducto = (texto, precio) => {
     };
 
     return nuevoProducto;
-};
+}
 
