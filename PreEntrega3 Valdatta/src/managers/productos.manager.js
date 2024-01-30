@@ -41,7 +41,7 @@ const mostrarProductos = () => {
 
     productos.forEach(producto => {
         let tarjeta = document.createElement("div")
-        tarjeta.className = "border border-3 border-dark rounded-2 p-2 bg-secondary d-flex justify-content-between m-2"
+        tarjeta.className = "border border-3 border-dark rounded-2 p-2 bg-secondary d-flex m-2 position-relative align-items-start flex-column w-25"
         tarjeta.innerHTML = `
                             <p class="mt-1">Producto: ${producto.nombre}</p
                             <p class="mt-1">Precio: ${producto.precio}</p>
@@ -79,7 +79,7 @@ const mostrarCarrito = () => {
     
     carrito.forEach(producto => {
         let tarjeta = document.createElement("div")
-        tarjeta.className = "border border-3 border-dark rounded-2 p-2 bg-secondary d-flex justify-content-between m-2"
+        tarjeta.className = "border border-3 border-dark rounded-2 p-2 bg-secondary d-flex m-2 position-relative align-items-start flex-column w-25"
         tarjeta.innerHTML = `
                             <p class="mt-1">Producto: ${producto.nombre}</p>
                             <p class="mt-1">Precio: ${producto.precio}</p>
