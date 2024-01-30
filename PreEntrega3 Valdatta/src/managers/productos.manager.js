@@ -8,6 +8,8 @@ import "toastify-js/src/toastify.css";
 
 
 
+    
+
 // tengo que crear un array donde se van a depositar los productos que cree con mi funcion agregar producto
 
 let productos = JSON.parse(localStorage.getItem("producto")) || [];
@@ -16,6 +18,17 @@ let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
 console.log(productos);
 console.log(carrito);
+
+fetch("/data/productos.json")
+    .then(resp => resp.json())
+    .then(data => {
+        productos = [...data];
+        console.log(data);
+        console.log(productos);
+        localStorage.setItem("producto", JSON.stringify(productos));
+        mostrarProductos();
+    })
+
 
 //arriba lo que hice fue hacer que el texto JSON pueda verse como un array en la consola, caso contrario me va a mostrar un array vacio
 
@@ -30,7 +43,7 @@ const mostrarProductos = () => {
         let tarjeta = document.createElement("div")
         tarjeta.className = "border border-3 border-dark rounded-2 p-2 bg-secondary d-flex justify-content-between m-2"
         tarjeta.innerHTML = `
-                            <p class="mt-1">Producto: ${producto.data}</p
+                            <p class="mt-1">Producto: ${producto.nombre}</p
                             <p class="mt-1">Precio: ${producto.precio}</p>
                             `
 
@@ -68,7 +81,7 @@ const mostrarCarrito = () => {
         let tarjeta = document.createElement("div")
         tarjeta.className = "border border-3 border-dark rounded-2 p-2 bg-secondary d-flex justify-content-between m-2"
         tarjeta.innerHTML = `
-                            <p class="mt-1">Producto: ${producto.data}</p
+                            <p class="mt-1">Producto: ${producto.nombre}</p>
                             <p class="mt-1">Precio: ${producto.precio}</p>
                             `
 
@@ -193,7 +206,7 @@ const comprar = (idProducto) => {
     }) .then(respuesta => {
         if (respuesta.isConfirmed){
             let productoComprado = productos.find (producto => producto.id === idProducto);
-            productos = productos.filter(producto => producto.id !== idProducto);
+            // productos = productos.filter(producto => producto.id !== idProducto);
             carrito.push(productoComprado);
             localStorage.setItem("producto", JSON.stringify(productos))
             localStorage.setItem("carrito", JSON.stringify(carrito))
@@ -203,7 +216,12 @@ const comprar = (idProducto) => {
     })
 }
 
-
+const nombreCreado = () => {
+    let nombre = `${producto.nombre}`
+    if(nombre === undefined) {
+        nombre = `${producto.data}`
+    }
+}
 
 export default {
     mostrarProductos,
@@ -212,4 +230,5 @@ export default {
     eliminarProducto,
     eliminarProductoCarrito,
     comprar,
+    nombreCreado
 }
